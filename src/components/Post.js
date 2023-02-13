@@ -8,6 +8,7 @@ export default function Post(props){
     const [curtido, setCurtido] = useState(false);
     const [cor, setCor] = useState("vermelho");
     const [numCurtidas, setNumCurtidas] = useState(numero);
+    const [classeAnimacao, setClasseAnimacao] = useState("containerLike")
 
     function salvar(){
       const statusSalvo = (salvo) ? false : true;
@@ -26,6 +27,8 @@ export default function Post(props){
         setNumCurtidas(numCurtidas + 1); 
         setCor("red");
         setCurtido(true);
+        setClasseAnimacao("containerLike curtido");
+        setTimeout(() => {setClasseAnimacao("containerLike")}, 500);
       }      
     }
 
@@ -42,8 +45,11 @@ export default function Post(props){
               </div>
             </div>
 
-            <div className="conteudo">
-              <img data-test="post-image" onClick={() => curtir("imagem")} src={props.imagemConteudo} alt={props.altConteudo} />
+            <div className="conteudo">              
+              <img data-test="post-image" onDoubleClick={() => curtir("imagem")} src={props.imagemConteudo} alt={props.altConteudo} />
+              <div className={classeAnimacao}>
+                <ion-icon name="heart"></ion-icon>
+              </div>
             </div>
 
             <div className="fundo">
