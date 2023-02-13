@@ -27,8 +27,10 @@ export default function Post(props){
         setNumCurtidas(numCurtidas + 1); 
         setCor("red");
         setCurtido(true);
-        setClasseAnimacao("containerLike curtido");
-        setTimeout(() => {setClasseAnimacao("containerLike")}, 500);
+        if (origem === "imagem") {
+          setClasseAnimacao("containerLike curtido");
+          setTimeout(() => {setClasseAnimacao("containerLike")}, 500);
+        }
       }      
     }
 
