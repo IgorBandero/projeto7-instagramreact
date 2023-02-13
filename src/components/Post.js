@@ -1,44 +1,72 @@
+import { useState } from "react";
+
 export default function Post(props){
 
-    return (
-        <div data-test="post" class="post">
+    let numero = Number(props.curtidas);
 
-            <div class="topo">
-              <div class="usuario">
+    const [salvo, setSalvo] = useState(false);
+    const [curtido, setCurtido] = useState(false);
+    const [cor, setCor] = useState("vermelho");
+    const [numCurtidas, setNumCurtidas] = useState(numero);
+
+    function salvar(){
+      const statusSalvo = (salvo) ? false : true;
+      setSalvo(statusSalvo);
+    }
+
+    function curtir(origem){
+      if (curtido) {        
+        if (origem === "botao") {
+          setNumCurtidas(numCurtidas - 1);
+          setCor("black");
+          setCurtido(false)
+        };        
+      }  
+      else {
+        setNumCurtidas(numCurtidas + 1); 
+        setCor("red");
+        setCurtido(true);
+      }      
+    }
+
+    return (
+        <div data-test="post" className="post">
+
+            <div className="topo">
+              <div className="usuario">
                 <img src={props.imagemUsuario} alt={props.altUsuario}/>     
                 {props.usuario}           
               </div>
-              <div class="acoes">
+              <div className="acoes">
                 <ion-icon name="ellipsis-horizontal"></ion-icon>
               </div>
             </div>
 
-            <div class="conteudo">
-              <img data-test="post-image" onClick="" src={props.imagemConteudo} alt={props.altConteudo} />
+            <div className="conteudo">
+              <img data-test="post-image" onClick={() => curtir("imagem")} src={props.imagemConteudo} alt={props.altConteudo} />
             </div>
 
-            <div class="fundo">
+            <div className="fundo">
 
-              <div class="acoes">
+              <div className="acoes">
                 <div>
-                  <ion-icon data-test="like-post" onClick="" name="heart-outline"></ion-icon>
+                  <ion-icon data-test="like-post" onClick={() => curtir("botao")} name={(curtido) ? "heart" : "heart-outline"} style={{color: cor}}></ion-icon>
                   <ion-icon name="chatbubble-outline"></ion-icon>
                   <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
                 <div>
-                  <ion-icon data-test="save-post" onClick="" name="bookmark-outline"></ion-icon>
+                  <ion-icon data-test="save-post" onClick={salvar} name={(salvo) ? "bookmark" : "bookmark-outline"}></ion-icon>
                 </div>
               </div>
 
-              <div class="curtidas">
+              <div className="curtidas">
                 <img src={props.imagemCurtida} alt= {props.altCurtida} />
-                <div class="texto">
-                  Curtido por <strong>{props.usuarioCurtida}</strong> e <strong>outras <span data-test="likes-number">{props.curtidas}</span> pessoas</strong>
+                <div className="texto">
+                  Curtido por <strong>{props.usuarioCurtida}</strong> e <strong>outras 
+                    <span data-test="likes-number"> {numCurtidas}</span> pessoas</strong>
                 </div>
               </div>
-
             </div>
-
         </div>
     );
 }

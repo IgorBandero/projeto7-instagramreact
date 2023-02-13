@@ -11,13 +11,16 @@ export default function Stories(){
                     {imagem: "./assets/img/filomoderna.svg", alt: "filomoderna", usuario: "filomoderna"},
                     {imagem: "./assets/img/memeriagourmet.svg", alt: "memeriagourmet", usuario: "memeriagourmet"}];
     return (
-        <div class="stories">
+        <div className="stories">
 
-          <ul class="listaStories">
-            {itens.map((item) => <li><Story imagem={item.imagem} alt={item.alt} usuario={item.usuario} /></li>)}
+          <ul className="listaStories">
+            {itens.map((item) => <li key={item.usuario}><Story imagem={item.imagem} 
+                                            alt={item.alt} 
+                                            usuario={item.usuario} /></li>
+            )}
           </ul>
           
-          <div class="setinha">
+          <div className="setinha">
             <ion-icon name="chevron-forward-circle"></ion-icon>
           </div>
           

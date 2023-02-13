@@ -8,14 +8,18 @@ export default function Sugestoes(){
                     {imagem:"assets/img/adorable_animals.svg", alt:"adorable_animals", nome:"adorable_animals", razao:"Segue você"},
                     {imagem:"assets/img/smallcutecats.svg", alt:"smallcutecats", nome:"smallcutecats", razao:"Segue você"} ];
     return (
-        <div class="sugestoes">
-            <div class="titulo">
+        <div className="sugestoes">
+            <div className="titulo">
                 Sugestões para você
                 <div>Ver tudo</div>
             </div>
 
-            <ul class="listaSugestoes">
-                {itens.map((item) => <li> <Sugestao imagem={item.imagem} alt={item.alt} nome={item.nome} razao={item.razao} /> </li>)}
+            <ul className="listaSugestoes">
+                {itens.map((item) => <li key={item.nome}> <Sugestao imagem={item.imagem} 
+                                                    alt={item.alt} 
+                                                    nome={item.nome} 
+                                                    razao={item.razao} /> </li>
+                )}
             </ul>
             
         </div>
